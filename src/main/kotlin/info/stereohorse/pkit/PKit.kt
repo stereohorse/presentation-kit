@@ -1,8 +1,9 @@
 package info.stereohorse.pkit
 
 import info.stereohorse.pkit.fx.Window
-import processing.core.PApplet
+import info.stereohorse.pkit.vision.Visor
 
 fun main(vararg args: String) {
-    PApplet.main(Window::class.java)
+
+    Window(Visor()).start()
 }
