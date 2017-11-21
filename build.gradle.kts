@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.dsl.Coroutines
+import org.jetbrains.kotlin.gradle.dsl.ExperimentalExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -18,36 +19,31 @@ apply {
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         jvmTarget = "1.8"
+        freeCompilerArgs = listOf("-Xjsr305=strict")
     }
+}
+
+kotlin {
+    experimental.coroutines = Coroutines.ENABLE
 }
 
 repositories {
     jcenter()
+
+    maven("https://dl.bintray.com/kotlin/kotlinx")
+    maven("https://dl.bintray.com/kotlin/ktor")
 }
+
 
 dependencies {
     compile(kotlin("stdlib-jre8"))
 
-    compile("org.openpnp:opencv:3.2.0-1")
+    compile("org.processing:core:3.3.5")
+    compile("io.ktor:ktor-server-netty:0.9.0")
 
-    val lwjglVersion = "3.1.3"
-    val lwjglNatives = "natives-macos"
+    compile("ch.qos.logback:logback-classic:1.2.1")
 
-    compile("org.lwjgl:lwjgl:$lwjglVersion")
-    compile("org.lwjgl:lwjgl-glfw:$lwjglVersion")
-    compile("org.lwjgl:lwjgl-jemalloc:$lwjglVersion")
-    compile("org.lwjgl:lwjgl-openal:$lwjglVersion")
-    compile("org.lwjgl:lwjgl-opengl:$lwjglVersion")
-    compile("org.lwjgl:lwjgl-stb:$lwjglVersion")
+    compile("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.0")
 
-    runtime("org.lwjgl:lwjgl:$lwjglVersion:$lwjglNatives")
-    runtime("org.lwjgl:lwjgl-glfw:$lwjglVersion:$lwjglNatives")
-    runtime("org.lwjgl:lwjgl-jemalloc:$lwjglVersion:$lwjglNatives")
-    runtime("org.lwjgl:lwjgl-openal:$lwjglVersion:$lwjglNatives")
-    runtime("org.lwjgl:lwjgl-opengl:$lwjglVersion:$lwjglNatives")
-    runtime("org.lwjgl:lwjgl-stb:$lwjglVersion:$lwjglNatives")
-
-    val junitVersion = "5.0.1"
-    testCompile("org.junit.jupiter:junit-jupiter-api:$junitVersion")
-    testRuntime("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
+    compile("com.corundumstudio.socketio:netty-socketio:1.7.13")
 }
