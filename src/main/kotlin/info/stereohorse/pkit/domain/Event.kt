@@ -4,18 +4,21 @@ package info.stereohorse.pkit.domain
 data class Event(val type: EventType?,
                  val x: Float?,
                  val y: Float?,
+                 val dx: Float?,
+                 val dy: Float?,
                  val mousePressed: Boolean?,
                  val mouseReleased: Boolean?) {
 
     @Suppress("unused")
-    constructor() : this(null, null, null, null, null)
+    constructor() : this(null, null, null, null, null, null, null)
 }
 
 enum class EventType {
     MOVE_POINTER,
     DRAW, DRAW_START,
     CLEAR,
-    RESET
+    RESET,
+    MOVE_CANVAS
 }
 
 data class OrderedEvents(private var lastEvent: OrderedEvent?) {

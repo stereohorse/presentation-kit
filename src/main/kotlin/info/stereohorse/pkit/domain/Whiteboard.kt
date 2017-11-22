@@ -13,10 +13,8 @@ class Whiteboard {
         @Suppress("NON_EXHAUSTIVE_WHEN")
         when (event.type) {
             CLEAR -> draws.clean()
-            DRAW, DRAW_START -> draws += event
+            DRAW, DRAW_START, MOVE_CANVAS -> draws += event
         }
-
-        println(event.type)
 
         observers.forEach {
             it(event)
